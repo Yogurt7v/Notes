@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 export function PrivateRoute( {children}: {children: JSX.Element} ) {
-    
-    const authContext = useContext(AuthContext);
+
+    const authContext = useContext();
 
     if (!authContext) {
         return (

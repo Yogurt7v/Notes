@@ -1,24 +1,28 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthenticationTitle } from "../Inputs/AuthenticationTitle";
 
-export function Login(){
+export function Login() {
 
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    })
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        e.preventDefault()
-        setUser(e.target.value)
-    }
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
 
-    return (    
-        <div>
-            <h1>Login Page</h1>
-            <form onSubmit={}>
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="Password" />
-                <button type="submit">Login</button>
-            </form>
-        </div>
+  const handleChange = (e): void => {
+    e.preventDefault();
+    setUser(user);
+    sessionStorage.setItem("user", JSON.stringify(user));
+    navigate("/");
+  };
+
+  return (
+    <AuthenticationTitle
+      user={user}
+      setUser={setUser}
+      onSubmit={(e) => handleChange(e)}
+    />
+  );
 }
