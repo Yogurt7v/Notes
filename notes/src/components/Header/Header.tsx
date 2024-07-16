@@ -1,14 +1,15 @@
-import { Autocomplete, Group, Burger, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
-import  NotesLogo from "../../assets/notes-notepad-svgrepo-com.svg"
-import classes from './HeaderSearch.module.css';
+import { Autocomplete, Group, Burger, rem } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconSearch } from "@tabler/icons-react";
+import NotesLogo from "../../assets/notes-notepad-svgrepo-com.svg";
+import classes from "./HeaderSearch.module.css";
+import { NavLink } from "react-router-dom";
 
 const links = [
-  { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
+  { link: "/about", label: "Features" },
+  { link: "/pricing", label: "Pricing" },
+  { link: "/learn", label: "Learn" },
+  { link: "/community", label: "Community" },
 ];
 
 export function HeaderSearch() {
@@ -30,7 +31,9 @@ export function HeaderSearch() {
       <div className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
-          <img src={NotesLogo}  alt="logo" className={classes.logo}/>
+          <NavLink to="/">
+            <img src={NotesLogo} alt="logo" className={classes.logo} />
+          </NavLink>
         </Group>
 
         <Group>
@@ -40,8 +43,21 @@ export function HeaderSearch() {
           <Autocomplete
             className={classes.search}
             placeholder="Search"
-            leftSection={<IconSearch style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
-            data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
+            leftSection={
+              <IconSearch
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+            data={[
+              "React",
+              "Angular",
+              "Vue",
+              "Next.js",
+              "Riot.js",
+              "Svelte",
+              "Blitz.js",
+            ]}
             visibleFrom="xs"
           />
         </Group>

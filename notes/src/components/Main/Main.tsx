@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Main.module.css";
+import { MainLayout } from "../MainLayout.tsx/MainLayout";
 
 export function Main() {
   const user = sessionStorage.getItem("user");
@@ -8,20 +9,13 @@ export function Main() {
 
   useEffect(() => {
     if (!user) {
-    
       navigate("/login");
     }
   }, [user]);
 
-    return (
-      <div className={styles.container}>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-        <h3>Main Page</h3>
-      </div>
-    );
+  return (
+    <>
+      <h1>Main Component</h1>
+    </>
+  );
 }
