@@ -39,11 +39,11 @@ export function NavbarSimple() {
 
   const notes = useLiveQuery(() => db.notes.toArray());
 
-  const links = notes?.map((item) => (
-    <NavLink to={`/notes/${item.id}`} className={classes.link} key={item.id}>
-      <span>{item.note} ЖАТЬ СЮДА!</span>
-    </NavLink>
-  ));
+  // const links = notes?.map((item) => (
+  //   <NavLink to={`/notes/${item.id}`} className={classes.link} key={item.id}>
+  //     <span>{item.note} ЖАТЬ СЮДА!</span>
+  //   </NavLink>
+  // ));
 
   return (
     <nav className={classes.navbar}>
@@ -54,7 +54,7 @@ export function NavbarSimple() {
         <span>Новая заметка</span>
         </NavLink>
         <NoteList />
-        <button onClick={() => db.notes.delete(0)}> Удалить</button>
+        <button onClick={() => db.notes.delete(notes[0].id)}> Удалить</button>
       </div>
 
       <div className={classes.footer}>
