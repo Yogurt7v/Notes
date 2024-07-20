@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Main } from "./components/Main/Main";
-import { createContext, useState } from "react";
-import { AddNoteForm } from "./components/AddComponent.js/AddNote.jsx";
+import { TipTap } from "./components/TipTapComponent/TipTap.jsx";
 import { SingleNote } from "./components/SingleNote/SingleNote";
 import { Login } from "./components/Login/Login";
 import "./App.css";
@@ -16,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Main />} />
-          <Route path="/new" element={<AddNoteForm />} />
-          <Route path="/notes/:id" element={<SingleNote/>} />
+          <Route path="/new" element={<TipTap />} />
+          <Route path="/notes/:id" element={<SingleNote />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
