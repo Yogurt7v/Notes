@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Group } from "@mantine/core";
 import { NoteList } from "../AddComponent.js/NoteList.jsx";
-import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../../db.ts";
 // import {
 //   IconBellRinging,
 //   IconFingerprint,
@@ -35,18 +33,14 @@ export function NavbarSimple() {
     navigate("/");
   }
 
-  const notes = useLiveQuery(() => db.notes.toArray());
-
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between"></Group>
-
         <NavLink to="/new" className={classes.link}>
           <span>Новая заметка</span>
         </NavLink>
         <NoteList />
-        <button onClick={() => db.notes.delete(notes[0].id)}> Удалить</button>
       </div>
 
       <div className={classes.footer}>

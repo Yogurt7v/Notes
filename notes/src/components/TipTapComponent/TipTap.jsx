@@ -4,7 +4,7 @@ import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mantine/core";
 import { db } from "../../../db";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,11 +13,11 @@ export const MenuBar = () => {
   const { editor } = useCurrentEditor();
   const id = useParams().id;
 
-  if (id) {
+  useEffect(() => {
     db.notes.get(parseInt(id)).then((note) => {
       editor.commands.setContent(note.note);
     });
-  }
+  }, [id]);
 
   if (!editor) {
     return null;
@@ -225,12 +225,13 @@ export const TipTap = () => {
   const [note, setNote] = useState("");
 
   const navigate = useNavigate();
+  const id = useParams().id;
 
   async function addNote() {
     try {
       const id = await db.notes.add({
         title,
-        note: note,
+        note,
         date: new Date(),
       });
 
@@ -239,6 +240,21 @@ export const TipTap = () => {
       setNote("");
     } catch (error) {
       setStatus(`Failed to add: ${error}`);
+    }
+  }
+
+  async function updateNote() {
+    try {
+      const num = parseInt(id);
+      await db.notes.update(num, {
+        title,
+        note,
+      });
+      setStatus(`Note updated`);
+      navigate(`/notes/${id}`);
+      setNote("");
+    } catch (error) {
+      setStatus(`Failed to update: ${error}`);
     }
   }
 
@@ -254,7 +270,9 @@ export const TipTap = () => {
         }}
       ></EditorProvider>
 
-      <Button onClick={addNote}>Добавить заметку</Button>
+      <Button onClick={id ? updateNote : addNote}>
+        {id ? "Update" : "Add"} Note
+      </Button>
     </div>
   );
 };

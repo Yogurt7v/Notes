@@ -22,11 +22,15 @@ export function SingleNote() {
           <span className={styles.time}>
             {singleNote?.date.toLocaleTimeString()}
           </span>
+          <div className={styles.buttons}>
+            <Button onClick={() => navigate(`/edit/${singleNote?.id}`)}>
+              Редактировать
+            </Button>
+            <Button onClick={() => db.notes.delete(singleNote?.id)} color="red">
+              Удалить
+            </Button>
+          </div>
         </div>
-        <Button onClick={() => db.notes.delete(singleNote?.id)}>Удалить</Button>
-        <Button onClick={() => navigate(`/edit/${singleNote?.id}`)}>
-          Редактировать
-        </Button>
         <div
           className={styles.note}
           dangerouslySetInnerHTML={{ __html: singleNote?.note }}
