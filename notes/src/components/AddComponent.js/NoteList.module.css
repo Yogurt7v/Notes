@@ -1,10 +1,18 @@
-
-
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
 }
 
-.link:visited{
-    text-decoration: none;
-    color: black;
+.link:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.listItem {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.titleItem {
+  font-weight: bold;
+  font-size: 18px;
 }

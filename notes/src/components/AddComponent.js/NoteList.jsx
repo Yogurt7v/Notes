@@ -8,12 +8,12 @@ export function NoteList() {
 
   return (
     <ul>
-      {notes?.map((note) => (
+      {notes?.map((note, index) => (
         <NavLink to={`/notes/${note.id}`} key={note.id} className={styles.link}>
-          <li>
-            <p>{note.title}</p>
-            <p>{note.date.toLocaleDateString()}</p>
+          <li key={note.id} className={styles.listItem}>
+            <p className={styles.titleItem}>{index + 1}) Заметка</p>
             <p>{note.date.toLocaleTimeString()}</p>
+            <p>{note.date.toLocaleDateString()}</p>
             <p>{note.newNote}</p>
           </li>
         </NavLink>
