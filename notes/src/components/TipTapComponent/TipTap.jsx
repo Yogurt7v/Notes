@@ -7,10 +7,17 @@ import StarterKit from "@tiptap/starter-kit";
 import React, { useState } from "react";
 import { Button } from "@mantine/core";
 import { db } from "../../../db";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const MenuBar = () => {
   const { editor } = useCurrentEditor();
+  const id = useParams().id;
+
+  if (id) {
+    db.notes.get(parseInt(id)).then((note) => {
+      editor.commands.setContent(note.note);
+    });
+  }
 
   if (!editor) {
     return null;
