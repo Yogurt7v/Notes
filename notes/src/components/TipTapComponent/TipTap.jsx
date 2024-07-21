@@ -5,8 +5,9 @@ import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React, { useState } from "react";
-import { Button, Input } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { db } from "../../../db";
+import { useNavigate } from "react-router-dom";
 
 export const MenuBar = () => {
   const { editor } = useCurrentEditor();
@@ -182,7 +183,7 @@ const extensions = [
   }),
 ];
 
-const content = `
+let content = `
 <h2>
   Hi there,
 </h2>
@@ -214,20 +215,21 @@ const content = `
 export const TipTap = () => {
   const [status, setStatus] = useState("");
   const [title, setTitle] = useState("");
-  const [note, setNote] = useState(content);
+  const [note, setNote] = useState("");
+
+  const navigate = useNavigate();
 
   async function addNote() {
     try {
-      console.log(note);
-      // const id = await db.notes.add({
-      //   title,
-      //   note,
-      //   date: new Date(),
-      // });
+      const id = await db.notes.add({
+        title,
+        note: note,
+        date: new Date(),
+      });
 
       setStatus(`New note${id} added`);
+      navigate(`/notes/${id}`);
       setNote("");
-      setTitle("");
     } catch (error) {
       setStatus(`Failed to add: ${error}`);
     }
@@ -240,6 +242,9 @@ export const TipTap = () => {
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
+        onUpdate={({ editor }) => {
+          setNote(editor.getHTML());
+        }}
       ></EditorProvider>
 
       <Button onClick={addNote}>Добавить заметку</Button>

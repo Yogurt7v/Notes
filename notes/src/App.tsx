@@ -17,6 +17,7 @@ function App() {
           <Route index element={<Main />} />
           <Route path="/new" element={<TipTap />} />
           <Route path="/notes/:id" element={<SingleNote />} />
+          <Route path="/edit/:id" element={<TipTap />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
