@@ -1,46 +1,24 @@
-import { Autocomplete, Group, Burger, rem } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Autocomplete, Group, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import NotesLogo from "../../assets/notes-notepad-svgrepo-com.svg";
 import classes from "./HeaderSearch.module.css";
 import { NavLink } from "react-router-dom";
-
-const links = [
-  { link: "/about", label: "Features" },
-  { link: "/pricing", label: "Pricing" },
-  { link: "/learn", label: "Learn" },
-  { link: "/community", label: "Community" },
-];
+import { useContext } from "react";
+import { SearchPhraseContext } from "../MainLayout.tsx/MainLayout";
 
 export function HeaderSearch() {
-  const [opened, { toggle }] = useDisclosure(false);
-
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </a>
-  ));
+  const { setSearchPhrase } = useContext(SearchPhraseContext);
 
   return (
     <header className={classes.header}>
       <div className={classes.inner}>
-        <Group>
-          <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
-          <NavLink to="/">
-            <img src={NotesLogo} alt="logo" className={classes.logo} />
-          </NavLink>
-        </Group>
+        <NavLink to="/">
+          <img src={NotesLogo} alt="logo" className={classes.logo} />
+        </NavLink>
 
         <Group>
-          <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">
-            {items}
-          </Group>
           <Autocomplete
+            onChange={(e) => setSearchPhrase(e)}
             className={classes.search}
             placeholder="Search"
             leftSection={
@@ -58,7 +36,7 @@ export function HeaderSearch() {
               "Svelte",
               "Blitz.js",
             ]}
-            visibleFrom="xs"
+            visibleFrom="xl"
           />
         </Group>
       </div>

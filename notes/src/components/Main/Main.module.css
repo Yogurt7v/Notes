@@ -1,5 +1,17 @@
 .container {
-  display: flex;
-  flex-direction: column;
   margin: 20px;
+  padding: 20px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.info {
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: gray;
+  font-style: italic;
+  padding: 10px;
+  border-radius: 5px;
 }

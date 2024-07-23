@@ -1,17 +1,29 @@
-import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../../db.ts";
 import { useParams } from "react-router-dom";
 import styles from "./SingleNote.module.css";
 import { Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { NotesContext } from "../../context/AppContext.tsx";
+import { useContext } from "react";
 
-export function SingleNote() {
+export function SingleNote({ data = null }) {
+  const notes = useContext(NotesContext);
   const id = useParams();
-  const notes = useLiveQuery(() => db.notes.toArray());
-  const singleNote = notes?.find(
-    (note) => note.id === parseInt(id.id as string)
-  );
   const navigate = useNavigate();
+
+  let singleNote;
+
+  if (!notes) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data) {
+    singleNote = notes?.find((note) => note.id === parseInt(id.id as string));
+  } else {
+    singleNote = data;
+  }
+
+  console.log("######data", data);
 
   return (
     <>
