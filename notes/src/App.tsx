@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Main />} />
           <Route path="/new" element={<TipTap />} />
-          <Route path="/notes/:id" element={<SingleNote />} />
+          <Route path="/notes/:id" element={<SingleNote data={undefined} />} />
           <Route path="/edit/:id" element={<TipTap />} />
         </Route>
         <Route path="/login" element={<Login />} />
