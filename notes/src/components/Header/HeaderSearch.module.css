@@ -1,8 +1,10 @@
 .header {
   height: rem(56px);
+
   margin-bottom: rem(120px);
   background-color: var(--mantine-color-body);
-  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
 
@@ -25,12 +27,11 @@
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
   font-size: var(--mantine-font-size-sm);
   font-weight: 500;
-
 }
 .link:hover {
-  background-color: #E8F3FC
+  background-color: #e8f3fc;
 }
 
-.logo{
-  margin: 20px 0 10px 50px
+.logo {
+  margin: 20px 0 10px 50px;
 }

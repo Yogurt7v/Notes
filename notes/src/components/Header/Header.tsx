@@ -28,13 +28,10 @@ export function HeaderSearch() {
               />
             }
             data={[
-              "React",
-              "Angular",
-              "Vue",
-              "Next.js",
-              "Riot.js",
-              "Svelte",
-              "Blitz.js",
+              "— Mom",
+              "that’s amazing",
+              "Isn’t that great?",
+              "Don’t forget to check the other examples too",
             ]}
             visibleFrom="xl"
           />

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./NoteList.module.css";
 
 export function NoteList() {
-  const notes = useLiveQuery(() => db.notes.toArray()); // вот тут в будущем брать из стейта
+  const notes = useLiveQuery(() => db.notes.toArray());
 
   return (
     <ul>
@@ -14,7 +14,7 @@ export function NoteList() {
             <p className={styles.titleItem}> #{index + 1}</p>
             <p className={styles.date}>{note.date.toLocaleTimeString()}</p>
             <p className={styles.date}>{note.date.toLocaleDateString()}</p>
-            <p>{note.newNote}</p>
+            {/* <p>{note.newNote}</p> */}
           </li>
         </NavLink>
       ))}

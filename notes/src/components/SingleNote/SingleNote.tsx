@@ -1,17 +1,18 @@
-import { db } from "../../../db.ts";
 import { useParams } from "react-router-dom";
-import styles from "./SingleNote.module.css";
 import { Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context/AppContext.tsx";
 import { useContext } from "react";
+import { db, Notes } from "../../../db.ts";
+import styles from "./SingleNote.module.css";
+import AlertDialog from "../Modal/Modal.tsx";
 
-export function SingleNote({ data = null }) {
+export function SingleNote({ data }: { data: Notes | undefined }) {
   const notes = useContext(NotesContext);
   const id = useParams();
   const navigate = useNavigate();
 
-  let singleNote;
+  let singleNote: Notes | undefined;
 
   if (!notes) {
     return <div>Loading...</div>;
@@ -23,8 +24,6 @@ export function SingleNote({ data = null }) {
     singleNote = data;
   }
 
-  console.log("######data", data);
-
   return (
     <>
       <div className={styles.container}>
@@ -35,17 +34,23 @@ export function SingleNote({ data = null }) {
             {singleNote?.date.toLocaleTimeString()}
           </span>
           <div className={styles.buttons}>
-            <Button onClick={() => navigate(`/edit/${singleNote?.id}`)}>
+            <Button
+              size="sm"
+              onClick={() => navigate(`/edit/${singleNote?.id}`)}
+            >
               Редактировать
             </Button>
-            <Button onClick={() => db.notes.delete(singleNote?.id)} color="red">
-              Удалить
-            </Button>
+            <AlertDialog
+              onAgreeClick={() => {
+                db.notes.delete(Number(singleNote?.id));
+                navigate(`/`);
+              }}
+            />
           </div>
         </div>
         <div
           className={styles.note}
-          dangerouslySetInnerHTML={{ __html: singleNote?.note }}
+          dangerouslySetInnerHTML={{ __html: String(singleNote?.note) }}
         ></div>
       </div>
     </>

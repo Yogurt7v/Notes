@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@mantine/core": "^7.11.2",
     "@mantine/form": "^7.11.2",
     "@mantine/hooks": "^7.11.2",
     "@mantine/modals": "^7.11.2",
     "@mantinex/mantine-logo": "^1.0.1",
     "@mdxeditor/editor": "^3.8.0",
+    "@mui/material": "^5.16.5",
     "@tabler/icons-react": "^3.10.0",
     "@tiptap/extension-color": "^2.5.4",
     "@tiptap/extension-list-item": "^2.5.4",

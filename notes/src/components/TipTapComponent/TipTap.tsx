@@ -2,11 +2,11 @@ import "./styles.scss";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
-import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect, useState } from "react";
+import { Notes, db } from "../../../db";
+import { EditorProvider, useCurrentEditor } from "@tiptap/react";
+import { useEffect, useState } from "react";
 import { Button } from "@mantine/core";
-import { db } from "../../../db";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const MenuBar = () => {
@@ -14,9 +14,13 @@ export const MenuBar = () => {
   const id = useParams().id;
 
   useEffect(() => {
-    db.notes.get(parseInt(id)).then((note) => {
-      editor.commands.setContent(note.note);
+    db.notes.get(Number(id)).then((note: Notes | undefined) => {
+      if (!note) {
+        return;
+      }
+      editor?.commands.setContent(note.note);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (!editor) {
@@ -177,20 +181,20 @@ export const MenuBar = () => {
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle.configure({ types: [ListItem.name] }),
+  TextStyle.configure(), //({ types: [ListItem.name] })
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
     orderedList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
   }),
 ];
 
-let content = `
+const content = `
 <h2>
   Hi there,
 </h2>
@@ -221,7 +225,6 @@ let content = `
 
 export const TipTap = () => {
   const [status, setStatus] = useState("");
-  const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
 
   const navigate = useNavigate();
@@ -230,7 +233,6 @@ export const TipTap = () => {
   async function addNote() {
     try {
       const id = await db.notes.add({
-        title,
         note,
         date: new Date(),
       });
@@ -245,9 +247,8 @@ export const TipTap = () => {
 
   async function updateNote() {
     try {
-      const num = parseInt(id);
+      const num = Number(id);
       await db.notes.update(num, {
-        title,
         note,
       });
       setStatus(`Note updated`);

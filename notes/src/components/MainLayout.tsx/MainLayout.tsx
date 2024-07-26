@@ -4,14 +4,24 @@ import { NavbarSimple as Sidebar } from "../Sidebar/NavBarSimple";
 import styles from "./MainLayout.module.css";
 import { createContext, useState } from "react";
 
-export const SearchPhraseContext = createContext("");
+interface MainLayoutContext {
+  searchPhrase: string | null;
+  setSearchPhrase: (searchPhrase: string) => void;
+}
+
+export const SearchPhraseContext = createContext<MainLayoutContext>({
+  searchPhrase: "",
+  setSearchPhrase: () => {},
+});
 
 export function MainLayout() {
   const [searchPhrase, setSearchPhrase] = useState("");
 
   return (
     <>
-      <SearchPhraseContext.Provider value={{ searchPhrase, setSearchPhrase }}>
+      <SearchPhraseContext.Provider
+        value={{ searchPhrase, setSearchPhrase } as MainLayoutContext}
+      >
         <Header />
         <div className={styles.container}>
           <Sidebar />

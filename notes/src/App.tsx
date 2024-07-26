@@ -1,16 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Main } from "./components/Main/Main";
-import { TipTap } from "./components/TipTapComponent/TipTap.jsx";
+import { TipTap } from "./components/TipTapComponent/TipTap";
 import { SingleNote } from "./components/SingleNote/SingleNote";
 import { Login } from "./components/Login/Login";
 import "./App.css";
 import { MainLayout } from "./components/MainLayout.tsx/MainLayout.js";
 
-// export const AuthContext = createContext();
-
 function App() {
   return (
-    // <AuthContext.Provider value={{ auth, setAuth }}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
@@ -22,7 +19,6 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-    // </AuthContext.Provider>
   );
 }
 

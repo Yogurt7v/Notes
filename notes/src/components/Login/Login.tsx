@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthenticationTitle } from "../Inputs/AuthenticationTitle";
 
 export function Login() {
-
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -11,7 +10,7 @@ export function Login() {
     password: "",
   });
 
-  const handleChange = (e): void => {
+  const handleChange = (e: Event): void => {
     e.preventDefault();
     setUser(user);
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -22,7 +21,7 @@ export function Login() {
     <AuthenticationTitle
       user={user}
       setUser={setUser}
-      onSubmit={(e) => handleChange(e)}
+      onSubmit={(e: Event) => handleChange(e)}
     />
   );
 }
