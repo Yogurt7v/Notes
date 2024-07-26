@@ -14,7 +14,6 @@ export function NoteList() {
             <p className={styles.titleItem}> #{index + 1}</p>
             <p className={styles.date}>{note.date.toLocaleTimeString()}</p>
             <p className={styles.date}>{note.date.toLocaleDateString()}</p>
-            {/* <p>{note.newNote}</p> */}
           </li>
         </NavLink>
       ))}

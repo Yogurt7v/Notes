@@ -8,7 +8,19 @@ import {
 } from "@mantine/core";
 import classes from "./AuthenticationTitle.module.css";
 
-export function AuthenticationTitle({ user, setUser, onSubmit }) {
+interface AuthenticationTitleProps {
+  user: { username: string; password: string };
+  setUser: React.Dispatch<
+    React.SetStateAction<{ username: string; password: string }>
+  >;
+  onSubmit: () => void;
+}
+
+export function AuthenticationTitle({
+  user,
+  setUser,
+  onSubmit,
+}: AuthenticationTitleProps) {
   return (
     <Container size={420} my={40}>
       <Title ta="center" className={classes.title}>

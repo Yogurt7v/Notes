@@ -10,8 +10,7 @@ export function Login() {
     password: "",
   });
 
-  const handleChange = (e: Event): void => {
-    e.preventDefault();
+  const handleChange = (): void => {
     setUser(user);
     sessionStorage.setItem("user", JSON.stringify(user));
     navigate("/");
@@ -21,7 +20,7 @@ export function Login() {
     <AuthenticationTitle
       user={user}
       setUser={setUser}
-      onSubmit={(e: Event) => handleChange(e)}
+      onSubmit={() => handleChange()}
     />
   );
 }
