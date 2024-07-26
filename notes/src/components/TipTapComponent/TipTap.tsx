@@ -224,8 +224,8 @@ const content = `
 `;
 
 export const TipTap = () => {
-  const [status, setStatus] = useState("");
-  const [note, setNote] = useState("");
+  // const [status, setStatus] = useState("");
+  const [note, setNote] = useState(content);
 
   const navigate = useNavigate();
   const id = useParams().id;
@@ -233,15 +233,14 @@ export const TipTap = () => {
   async function addNote() {
     try {
       const id = await db.notes.add({
-        note,
+        note: note,
         date: new Date(),
       });
 
-      setStatus(`New note${id} added`);
+      // setStatus(`New note${id} added`);
       navigate(`/notes/${id}`);
-      setNote("");
     } catch (error) {
-      setStatus(`Failed to add: ${error}`);
+      // setStatus(`Failed to add: ${error}`);
     }
   }
 
@@ -251,11 +250,11 @@ export const TipTap = () => {
       await db.notes.update(num, {
         note,
       });
-      setStatus(`Note updated`);
+      // setStatus(`Note updated`);
       navigate(`/notes/${id}`);
       setNote("");
     } catch (error) {
-      setStatus(`Failed to update: ${error}`);
+      // setStatus(`Failed to update: ${error}`);
     }
   }
 

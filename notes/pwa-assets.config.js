@@ -6,9 +6,9 @@ import {
 export default defineConfig({
   preset,
   images: [
-    "./src/assets/android96.png",
-    "./src/assets/android192.png",
-    "./src/assets/android512.png",
-    "./src/assets/android144.png",
+    "public/android96.png",
+    "public/android192.png",
+    "public/android512.png",
+    "public/android144.png",
   ],
 });
